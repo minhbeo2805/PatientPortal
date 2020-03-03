@@ -1,5 +1,7 @@
 {
   "name": "PP-demo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
