@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {PatientService} from '../../services/patient.service';
 import {LoadingController} from '@ionic/angular';
-import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
 
 @Component({

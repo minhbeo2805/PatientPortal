@@ -1,1 +1,7 @@
 export const API_TIMEOUT = 10000;
+
+export const GENDER_TEXT = {
+    F: 'Nữ',
+    M: 'Nam',
+    Unknown: 'N/A'
+};

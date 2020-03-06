@@ -1,3 +1,19 @@
-<p>
-  image works!
-</p>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-icon name="chevron-back-outline" (click)="closeModal()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <img src="../assets/images/chup-x-quang-1280x720.jpeg"/>
+        <ion-card-header>
+            <ion-card-title>Ảnh X-quang 1</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button (click)="openReport()">Xem báo cáo</ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

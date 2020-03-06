@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-report',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {}
+  constructor(public modalController: ModalController) {
+  }
 
+  ngOnInit() {
+  }
+
+  async closeModal() {
+    await this.modalController.dismiss(null, null, 'Report');
+  }
 }

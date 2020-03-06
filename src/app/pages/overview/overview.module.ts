@@ -6,6 +6,8 @@ import {IonicModule} from '@ionic/angular';
 
 import {OverviewPage} from './overview.page';
 import {RouterModule, Routes} from '@angular/router';
+import {ImageComponent} from '../../components/image/image.component';
+import {ReportComponent} from '../../components/report/report.component';
 
 const routes: Routes = [
     {
@@ -21,7 +23,11 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [OverviewPage]
+    declarations: [OverviewPage, ImageComponent, ReportComponent],
+    entryComponents: [
+        ImageComponent,
+        ReportComponent
+    ]
 })
 export class OverviewPageModule {
 }

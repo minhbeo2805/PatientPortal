@@ -1,3 +1,63 @@
-<p>
-  report works!
-</p>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-icon name="chevron-back-outline" (click)="closeModal()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>
+                Báo cáo kết quả
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
+                             offset-sm="4">
+                        <div>
+                            Bác sỹ chỉ định : Nguyễn Thị X<br>
+                            Bác sỹ chẩn đoán: Lê Đình Y
+                        </div>
+                    </ion-col>
+                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
+                             offset-sm="4">
+                        <div>
+                        </div>
+                    </ion-col>
+                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
+                             offset-sm="4">
+                        <div>
+                            * Nội dung*
+                        </div>
+                    </ion-col>
+                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
+                             offset-sm="4">
+                        <div>
+                            Các nhánh phế quản tăng đậm.<br>
+                            Dày thành phế quản. Góc sườn hoành hai bên sáng nhọn. <br>
+                            Bóng tim không to. Chỉ số tim ngực < 50 %.<br>
+                            Trung thất bình thường.<br>
+                            Không thấy tổn thương xương thành ngực.
+                        </div>
+                    </ion-col>
+                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
+                             offset-sm="4">
+                        <div>
+                            *Kết luận*
+                        </div>
+                    </ion-col>
+                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
+                             offset-sm="4">
+                        <div>
+                            Viêm phế quản
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

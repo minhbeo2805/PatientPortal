@@ -1,3 +1,25 @@
 ion-icon {
   font-size: 32px;
 }
+
+ion-card{
+  margin-bottom: 15px;
+}
+
+.title{
+  font-size: 20px;
+}
+
+.col-cell {
+  border-color: black;
+  border-width: .01em;
+  border-style:solid; margin-bottom : -1px;
+}
+
+.col-header {
+  border-color: black;
+  border-width: .01em;
+  border-style:solid; margin-bottom : -1px;
+  background-color: lightgrey;
+}
+
