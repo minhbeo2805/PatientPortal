@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {PatientService} from '../../services/patient.service';
@@ -10,11 +10,12 @@ import {Router} from '@angular/router';
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
+
 export class LoginPage implements OnInit {
 
-    private loginForm: FormGroup;
-    private minDate;
-    private maxDate;
+    public loginForm: FormGroup;
+    public minDate;
+    public maxDate;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -41,15 +42,21 @@ export class LoginPage implements OnInit {
         await loading.present();
         this.patientService.login({
             id: this.loginForm.value.id,
-            birthday: moment(this.loginForm.value.birthday).format('MM-DD')
+            birthday: moment(this.loginForm.value.birthday).format('MM-DD-YYYY')
         }).then(async data => {
-                const token = data.data;
-                localStorage.setItem('token', token);
-                await loading.dismiss();
-                await this.router.navigate(['./overview']);
+                if (data.success) {
+                    const token = data.message;
+                    localStorage.removeItem('token');
+                    localStorage.setItem('token', token);
+                    await loading.dismiss();
+                    await this.router.navigate(['./overview']);
+                } else {
+                    console.log('Không tìm thấy dữ liệu');
+                    await loading.dismiss();
+                }
             }
         ).catch(async error => {
-                console.log('Không tìm thấy dữ liệu');
+                console.log('Thử lại');
                 await loading.dismiss();
             }
         );

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {ReportComponent} from '../report/report.component';
+import {PatientService} from '../../services/patient.service';
 
 @Component({
     selector: 'app-image',
@@ -8,18 +9,26 @@ import {ReportComponent} from '../report/report.component';
     styleUrls: ['./image.component.scss'],
 })
 export class ImageComponent implements OnInit {
+    @Input() studyId: any;
 
-    constructor(public modalController: ModalController) {
+    constructor(public modalController: ModalController,
+                public patientService: PatientService) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+        try {
+            const apiResult = await this.patientService.getStudyImages(this.studyId);
+            console.log(apiResult);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     async openReport() {
         const report = await this.modalController.create({
             component: ReportComponent,
             id: 'Report',
-            cssClass: 'modal-fullscreen'
+            cssClass: 'modal-report'
         });
         await report.present();
     }

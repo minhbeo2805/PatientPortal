@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PatientService} from '../../services/patient.service';
 import * as moment from 'moment';
 // @ts-ignore
-import {GENDER_TEXT} from '../../common/constants';
+import {API_STATUS, GENDER_TEXT} from '../../common/constants';
 import {ModalController} from '@ionic/angular';
 import {ImageComponent} from '../../components/image/image.component';
 import {Router} from '@angular/router';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
     templateUrl: './overview.page.html',
     styleUrls: ['./overview.page.scss'],
 })
-export class OverviewPage implements OnInit {
+export class OverviewPage {
     patientData: any;
     seriesUid: any;
     studyUid: any;
@@ -24,43 +24,44 @@ export class OverviewPage implements OnInit {
                 private router: Router) {
     }
 
-    async ngOnInit() {
+    async ionViewWillEnter() {
         try {
             const apiResult = await this.patientService.getPatientData();
-            this.patientData = apiResult.data;
-            this.seriesUid = this.getSeriesUid(this.patientData);
-            this.studyUid = this.getStudyUid(this.patientData);
-            this.displayData = this.getDisplayData(this.patientData);
-            this.tableData = this.getTableData(this.patientData);
-            this.displayData.displayBirthday = this.displayData.patient_birth_dttm ?
-                moment(this.displayData.patient_birth_dttm).format('YYYY-MM-DD') : '';
-            this.displayData.displayGender = this.displayData.sex ? GENDER_TEXT[this.displayData.sex] : GENDER_TEXT.Unknown;
+            console.log(apiResult);
+            if (apiResult.success) {
+                this.patientData = apiResult.message;
+                this.studyUid = this.getStudyUid(this.patientData);
+                this.displayData = this.getDisplayData(this.patientData);
+                this.displayData.displayBirthday = this.displayData.PATIENT_BIRTH_DTTM ?
+                    moment(this.displayData.PATIENT_BIRTH_DTTM).format('YYYY-MM-DD') : '';
+                this.displayData.displayGender = this.displayData.PATIENT_SEX ?
+                    GENDER_TEXT[this.displayData.PATIENT_SEX] : GENDER_TEXT.Unknown;
+            }
         } catch (e) {
-            console.log(e);
+            if (e.status === API_STATUS.Unauthorized) {
+                localStorage.removeItem('token');
+                this.transitToLogin();
+            } else {
+                console.log(e);
+            }
         }
     }
 
     getStudyUid(patientData) {
-        return patientData.studyserieslist[0].uid;
-    }
-
-    getSeriesUid(patientData) {
-        return patientData.studyserieslist[0].serieslist[0].uid;
+        return patientData[0].STUDY_ID;
     }
 
     getDisplayData(patientData) {
-        return patientData.studylist[0];
+        return patientData[0];
     }
 
-    getTableData(patientData) {
-        return patientData.studylist;
-    }
-
-    async openImage() {
+    async openImage(studyId) {
         const image = await this.modalController.create({
             component: ImageComponent,
             id: 'Image',
-            cssClass: 'modal-fullscreen'
+            componentProps: {
+                studyId,
+            }
         });
 
         await image.present();

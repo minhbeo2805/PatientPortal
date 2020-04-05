@@ -3,6 +3,7 @@
         <ion-buttons slot="start">
             <ion-icon name="chevron-back-outline" (click)="transitToLogin()"></ion-icon>
         </ion-buttons>
+        <ion-label>Thông tin bệnh nhân</ion-label>
     </ion-toolbar>
 </ion-header>
 
@@ -13,7 +14,7 @@
                 <ion-row>
                     <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
                              offset-sm="4">
-                        <div class="title">{{displayData.ptname || ''}}
+                        <div class="title">{{displayData.PATIENT_NAME || ''}}
                         </div>
                     </ion-col>
                 </ion-row>
@@ -25,7 +26,7 @@
                         <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
                                  offset-sm="4">
                             <div>
-                                Mã bệnh nhân: {{displayData.ptid || ''}}
+                                Mã bệnh nhân: {{displayData.PATIENT_ID || ''}}
                             </div>
                         </ion-col>
                         <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
@@ -59,11 +60,6 @@
 
         <ion-grid>
             <ion-row>
-                <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">
-                    <div>
-                        Loại hình chụp
-                    </div>
-                </ion-col>
                 <ion-col class="col-header" size="6" size-lg="6" size-md="6" size-sm="6">
                     <div>
                         Mô tả ca khám
@@ -71,25 +67,25 @@
                 </ion-col>
                 <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">
                     <div>
-                        Ngày
+                        Ngày khám
                     </div>
+                </ion-col>
+                <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">
                 </ion-col>
             </ion-row>
-            <ion-row  (click)="openImage()" *ngFor="let caseData of tableData">
-                <ion-col class="col-cell" size="3" size-lg="3" size-md="3" size-sm="3">
-                    <div>
-                        {{caseData.modalities}}
-                    </div>
-                </ion-col>
+            <ion-row  *ngFor="let caseData of patientData">
                 <ion-col class="col-cell" size="6" size-lg="6" size-md="6" size-sm="6">
                     <div>
-                        {{caseData.desc}}
+                        {{caseData.STUDY_DESC}}
                     </div>
                 </ion-col>
                 <ion-col class="col-cell" size="3" size-lg="3" size-md="3" size-sm="3">
                     <div>
-                        {{caseData.datetime}}
+                        {{caseData.STUDY_DTTM | date: 'dd/MM/yyyy HH:mm:ss'}}
                     </div>
+                </ion-col>
+                <ion-col class="col-cell" style="text-align: center" size="3" size-lg="3" size-md="3" size-sm="3">
+                    <ion-button (click)="openImage(caseData.STUDY_KEY)" size="small">Chi tiết</ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>

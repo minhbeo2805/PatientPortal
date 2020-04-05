@@ -27,6 +27,7 @@ export class ApiService {
                 .subscribe(async data => {
                     resolve(data);
                 }, async error => {
+                    console.log(error)
                     reject(error);
                 })
             ;
