@@ -4,21 +4,23 @@
             <ion-row justify-content-center>
                 <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
                     <div text-center>
-                        <h4>Login Form</h4>
+                        <h1 class="title-login">Nhập thông tin bệnh nhân</h1>
                     </div>
                     <div padding>
                         <ion-item>
-                            <ion-input formControlName="id" type="text" placeholder="Nhập ID ca khám"></ion-input>
+                            <ion-label position="floating">ID bệnh nhân:</ion-label>
+                            <ion-input formControlName="id" type="text" placeholder="12345678" ></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-datetime class="date-picker" formControlName="birthday"
+                            <ion-label position="floating">Ngày sinh:</ion-label>
+                            <ion-datetime placeholder="2020/01/31" class="date-picker" formControlName="birthday"
                                           displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" min="{{minDate}}"
                                           max="{{maxDate}}">
                             </ion-datetime>
                         </ion-item>
                     </div>
                     <div padding>
-                        <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Login
+                        <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Đăng nhập
                         </ion-button>
                     </div>
                 </ion-col>

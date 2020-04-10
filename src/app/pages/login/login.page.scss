@@ -17,6 +17,7 @@ ion-row {
 }
 
 ion-col {
+  padding: 24px;
   border: 1px solid #488aff;
   background: $white-color;
 }
@@ -32,4 +33,30 @@ ion-button {
   ion-col {
     border: none;
   }
+}
+
+ion-input{
+  padding-left: 20px;
+}
+
+input{
+  text-indent: 20px;
+}
+
+ion-label{
+  margin-bottom: 5px!important;
+  font-size: 25px !important;
+}
+
+form{
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.title-login{
+  text-align: center;
 }

@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-icon name="chevron-back-outline" (click)="transitToOverview()"></ion-icon>
+        </ion-buttons>
+        <ion-label>Chi tiết ca khám</ion-label>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <main *ngIf="imagesList">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-button size="large" type="button" (click)="openReport()" expand="block">Xem báo cáo
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let image of imagesList">
+                <ion-col class="col-header" size="12" size-lg="12" size-md="12" size-sm="12">
+                    <div>
+                        <img src="data:image/jpeg;base64,{{image}}">
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </main>
+</ion-content>

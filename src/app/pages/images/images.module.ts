@@ -1,17 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
-import {OverviewPage} from './overview.page';
+
+import {ImagesPage} from './images.page';
 import {RouterModule, Routes} from '@angular/router';
 import {ReportComponent} from '../../components/report/report.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: OverviewPage
+        component: ImagesPage
     }
 ];
 
@@ -20,10 +21,13 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         IonicModule,
-        RouterModule.forChild(routes)
+        ReactiveFormsModule,
+        RouterModule.forChild(routes),
     ],
-    declarations: [OverviewPage],
-
+    declarations: [ImagesPage, ReportComponent],
+    entryComponents: [
+        ReportComponent
+    ]
 })
-export class OverviewPageModule {
+export class ImagesPageModule {
 }

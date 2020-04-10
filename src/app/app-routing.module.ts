@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'overview',
         loadChildren: './pages/overview/overview.module#OverviewPageModule',
         canActivate: [AuthService]
+    },
+    {
+        path: 'images',
+        loadChildren: './pages/images/images.module#ImagesPageModule',
     }
 ];
 

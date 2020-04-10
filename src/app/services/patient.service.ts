@@ -8,20 +8,25 @@ import {Router} from '@angular/router';
 })
 export class PatientService {
 
-    static LOGIN_URL = '';
-    static PATIENT_DATA_URL = 'me';
-    static IMAGE_DATA_URL = 'getImage';
+    static LOGIN_URL = 'entry/';
+    static PATIENT_DATA_URL = 'api/me/related';
+    static STUDY_IMAGE_URL = 'api/me/view';
 
     constructor(private apiService: ApiService) {
     }
 
     login(param) {
-        const pathUrl = environment.server_api.concat(PatientService.LOGIN_URL, param.id, '/auth?dob=', param.birthday);
+        const pathUrl = environment.server_api.concat(PatientService.LOGIN_URL, param.id, '/', param.birthday);
         return this.apiService.getApi(pathUrl);
     }
 
-    getPatientData() {
+    getPatientData(): Promise<any> {
         const pathUrl = environment.server_api.concat(PatientService.PATIENT_DATA_URL);
+        return this.apiService.getApi(pathUrl);
+    }
+
+    getStudyImages(studyId) {
+        const pathUrl = environment.server_api.concat(PatientService.STUDY_IMAGE_URL, '/', studyId);
         return this.apiService.getApi(pathUrl);
     }
 }
