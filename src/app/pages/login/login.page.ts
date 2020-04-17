@@ -37,45 +37,46 @@ export class LoginPage implements OnInit {
     }
 
     async submit() {
-        const loading = await this.loadingController.create({
-            spinner: 'circles'
-        });
-        await loading.present();
-        this.patientService.login({
-            id: this.loginForm.value.id,
-            birthday: moment(this.loginForm.value.birthday).format('MM-DD-YYYY')
-        }).then(async data => {
-                if (data.success) {
-                    const token = data.message;
-                    localStorage.removeItem('token');
-                    localStorage.setItem('token', token);
-                    await loading.dismiss();
-                    await this.router.navigate(['./overview']);
-                } else {
-                    const alert = await this.alertController.create({
-                        header: 'Đăng nhập thất bại',
-                        message: 'Id bệnh nhân hoặc ngày sinh chưa chính xác.' +
-                            ' Vui lòng thử lại',
-                        buttons: ['Thử lại'],
-                        backdropDismiss: false
-                    });
-
-                    await alert.present();
-                    await loading.dismiss();
-                }
-            }
-        ).catch(async error => {
-                const alert = await this.alertController.create({
-                    header: 'Đăng nhập thất bại',
-                    message: ' Vui lòng thử lại',
-                    buttons: ['Thử lại'],
-                    backdropDismiss: false
-                });
-
-                await alert.present();
-                await loading.dismiss();
-            }
-        );
+        this.router.navigate(['./overview']);
+        // const loading = await this.loadingController.create({
+        //     spinner: 'circles'
+        // });
+        // await loading.present();
+        // this.patientService.login({
+        //     id: this.loginForm.value.id,
+        //     birthday: moment(this.loginForm.value.birthday).format('MM-DD-YYYY')
+        // }).then(async data => {
+        //         if (data.success) {
+        //             const token = data.message;
+        //             localStorage.removeItem('token');
+        //             localStorage.setItem('token', token);
+        //             await loading.dismiss();
+        //             await this.router.navigate(['./overview']);
+        //         } else {
+        //             const alert = await this.alertController.create({
+        //                 header: 'Đăng nhập thất bại',
+        //                 message: 'Id bệnh nhân hoặc ngày sinh chưa chính xác.' +
+        //                     ' Vui lòng thử lại',
+        //                 buttons: ['Thử lại'],
+        //                 backdropDismiss: false
+        //             });
+        //
+        //             await alert.present();
+        //             await loading.dismiss();
+        //         }
+        //     }
+        // ).catch(async error => {
+        //         const alert = await this.alertController.create({
+        //             header: 'Đăng nhập thất bại',
+        //             message: ' Vui lòng thử lại',
+        //             buttons: ['Thử lại'],
+        //             backdropDismiss: false
+        //         });
+        //
+        //         await alert.present();
+        //         await loading.dismiss();
+        //     }
+        // );
     }
 
 }

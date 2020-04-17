@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scroll-x="true">
     <main *ngIf="imagesList">
         <ion-grid>
             <ion-row>
@@ -17,19 +17,28 @@
                 </ion-col>
             </ion-row>
 
-            <ion-slides pager="false" scrollbar="true" [options]="slideOpts">
-                <ion-slide *ngFor="let image of imagesList">
-                    <img src="data:image/jpeg;base64,{{image}}">
-                </ion-slide>
-            </ion-slides>
+            <div class="thumnails">
+                <div class="list-thumbnail">
+                    <div class="img-thumb" *ngFor="let image of imagesList" >
+                        <img src="data:image/jpeg;base64,{{image}}">
+                    </div>
+                </div>
+            </div>
 
-<!--            <ion-row *ngFor="let image of imagesList">-->
-<!--                <ion-col class="col-header" size="12" size-lg="12" size-md="12" size-sm="12">-->
-<!--                    <div>-->
-<!--                        <img src="data:image/jpeg;base64,{{image}}">-->
-<!--                    </div>-->
-<!--                </ion-col>-->
-<!--            </ion-row>-->
+
+            <!--            <ion-slides pager="false" scrollbar="true" [options]="slideOpts">-->
+            <!--                <ion-slide *ngFor="let image of imagesList">-->
+            <!--                    <img src="data:image/jpeg;base64,{{image}}">-->
+            <!--                </ion-slide>-->
+            <!--            </ion-slides>-->
+
+            <!--            <ion-row *ngFor="let image of imagesList">-->
+            <!--                <ion-col class="col-header" size="12" size-lg="12" size-md="12" size-sm="12">-->
+            <!--                    <div>-->
+            <!--                        <img src="data:image/jpeg;base64,{{image}}">-->
+            <!--                    </div>-->
+            <!--                </ion-col>-->
+            <!--            </ion-row>-->
         </ion-grid>
     </main>
 </ion-content>

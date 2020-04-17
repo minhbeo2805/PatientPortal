@@ -4,3 +4,24 @@ ion-icon {
 ion-col{
   text-align: center;
 }
+
+.thumnails{
+  overflow-x: auto;
+  overflow-y: hidden;
+  .list-thumbnail{
+    height: 100%;
+    white-space: nowrap;
+    .img-thumb{
+      text-align: center;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 4px;
+      margin:0 2px 0 0;
+      width: 100vw;
+      background: black;
+    }
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
