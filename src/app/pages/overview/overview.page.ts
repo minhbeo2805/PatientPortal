@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {PatientService} from '../../services/patient.service';
 import * as moment from 'moment';
 // @ts-ignore
-import {API_STATUS, GENDER_TEXT} from '../../common/constants';
+import {API_STATUS, GENDER_TEXT, MOCK_RELATED} from '../../common/constants';
 import {ModalController} from '@ionic/angular'
 import {NavigationExtras, Router} from '@angular/router';
 import {SharedService} from '../../services/shared.service';
@@ -24,7 +24,8 @@ export class OverviewPage {
 
     async ionViewWillEnter() {
         try {
-            const apiResult = await this.patientService.getPatientData();
+            // const apiResult = await this.patientService.getPatientData();
+            const apiResult = MOCK_RELATED;
             console.log(apiResult);
             if (apiResult.success) {
                 this.patientData = apiResult.message;

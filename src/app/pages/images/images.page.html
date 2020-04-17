@@ -16,13 +16,20 @@
                     </ion-button>
                 </ion-col>
             </ion-row>
-            <ion-row *ngFor="let image of imagesList">
-                <ion-col class="col-header" size="12" size-lg="12" size-md="12" size-sm="12">
-                    <div>
-                        <img src="data:image/jpeg;base64,{{image}}">
-                    </div>
-                </ion-col>
-            </ion-row>
+
+            <ion-slides pager="false" scrollbar="true" [options]="slideOpts">
+                <ion-slide *ngFor="let image of imagesList">
+                    <img src="data:image/jpeg;base64,{{image}}">
+                </ion-slide>
+            </ion-slides>
+
+<!--            <ion-row *ngFor="let image of imagesList">-->
+<!--                <ion-col class="col-header" size="12" size-lg="12" size-md="12" size-sm="12">-->
+<!--                    <div>-->
+<!--                        <img src="data:image/jpeg;base64,{{image}}">-->
+<!--                    </div>-->
+<!--                </ion-col>-->
+<!--            </ion-row>-->
         </ion-grid>
     </main>
 </ion-content>

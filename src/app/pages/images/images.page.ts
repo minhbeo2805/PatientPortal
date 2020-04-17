@@ -4,6 +4,7 @@ import {PatientService} from '../../services/patient.service';
 import {ReportComponent} from '../../components/report/report.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../services/shared.service';
+import {MOCK_STUDY} from '../../common/constants';
 
 @Component({
     selector: 'app-images',
@@ -13,6 +14,10 @@ import {SharedService} from '../../services/shared.service';
 export class ImagesPage {
     public studyId: number;
     public imagesList: any;
+    slideOpts = {
+        initialSlide: 1,
+        speed: 400
+    };
 
     constructor(public modalController: ModalController,
                 public patientService: PatientService,
@@ -24,7 +29,8 @@ export class ImagesPage {
     async ionViewWillEnter() {
         this.studyId = this.sharedService.studyId;
         try {
-            const apiResult = await this.patientService.getStudyImages(this.studyId);
+            // const apiResult = await this.patientService.getStudyImages(this.studyId);
+            const apiResult = MOCK_STUDY;
             if (apiResult.success) {
                 this.imagesList = apiResult.message;
             } else {
