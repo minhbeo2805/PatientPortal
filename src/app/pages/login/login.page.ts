@@ -16,6 +16,8 @@ export class LoginPage implements OnInit {
     public loginForm: FormGroup;
     public minDate;
     public maxDate;
+    public isInvalid: boolean;
+    public errorMessage: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,6 +36,8 @@ export class LoginPage implements OnInit {
         );
         this.minDate = moment().year() - 100;
         this.maxDate = moment().year();
+        this.isInvalid = false;
+        this.errorMessage = '';
     }
 
     async submit() {
@@ -79,4 +83,7 @@ export class LoginPage implements OnInit {
         // );
     }
 
+    alert() {
+        alert('concac');
+    }
 }

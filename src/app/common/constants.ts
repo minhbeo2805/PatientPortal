@@ -10,6 +10,11 @@ export const GENDER_TEXT = {
     Unknown: 'N/A'
 };
 
+export const MESSAGES = {
+    AUTHENTICATE_FAIL: 'Thông tin đăng nhập không chính xác!',
+    API_FAIL: 'Vui lòng đăng nhập lại!'
+};
+
 export const MOCK_RELATED = {
     success: true,
     message: [{

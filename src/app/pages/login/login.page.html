@@ -1,34 +1,100 @@
-<ion-content padding>
-    <form [formGroup]="loginForm" (ngSubmit)="submit()">
-        <ion-grid>
-            <ion-row justify-content-center>
-                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-                    <div text-center>
-                        <h1 class="title-login">Nhập thông tin bệnh nhân</h1>
-                    </div>
-                    <div padding>
-                        <ion-item>
-                            <ion-label position="floating">ID bệnh nhân:</ion-label>
-                            <ion-input formControlName="id" type="text" placeholder="12345678" ></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label position="floating">Ngày sinh:</ion-label>
-                            <ion-datetime placeholder="2020/01/31" class="date-picker" formControlName="birthday"
-                                          displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" min="{{minDate}}"
-                                          max="{{maxDate}}">
-                            </ion-datetime>
-                        </ion-item>
-                    </div>
-                    <div padding>
-<!--                        <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Đăng nhập-->
+<!--<ion-content padding>-->
+<!--    <form [formGroup]="loginForm" (ngSubmit)="submit()">-->
+<!--        <ion-grid>-->
+<!--            <ion-row justify-content-center>-->
+<!--                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">-->
+<!--                    <div text-center>-->
+<!--                        <h1 class="title-login">Nhập thông tin bệnh nhân</h1>-->
+<!--                    </div>-->
+<!--                    <div padding>-->
+<!--                        <ion-item>-->
+<!--                            <ion-label position="floating">ID bệnh nhân:</ion-label>-->
+<!--                            <ion-input formControlName="id" type="text" placeholder="12345678" ></ion-input>-->
+<!--                        </ion-item>-->
+<!--                        <ion-item>-->
+<!--                            <ion-label position="floating">Ngày sinh:</ion-label>-->
+<!--                            <ion-datetime placeholder="2020/01/31" class="date-picker" formControlName="birthday"-->
+<!--                                          displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" min="{{minDate}}"-->
+<!--                                          max="{{maxDate}}">-->
+<!--                            </ion-datetime>-->
+<!--                        </ion-item>-->
+<!--                    </div>-->
+<!--                    <div padding>-->
+<!--&lt;!&ndash;                        <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Đăng nhập&ndash;&gt;-->
+<!--&lt;!&ndash;                        </ion-button>&ndash;&gt;-->
+<!--                        <ion-button size="large" type="submit"  expand="block">Đăng nhập-->
 <!--                        </ion-button>-->
-                        <ion-button size="large" type="submit"  expand="block">Đăng nhập
-                        </ion-button>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </form>
-</ion-content>
+<!--                    </div>-->
+<!--                </ion-col>-->
+<!--            </ion-row>-->
+<!--        </ion-grid>-->
+<!--    </form>-->
+<!--</ion-content>-->
 
+<ion-content>
+    <div class="wrap">
+        <div class="wrap-login">
+            <div class="main">
+                <!-- Start: Main logo -->
+                <div class="main-logo">
+                    <img class="main-logo--img" src="../assets/images/logo.png" alt="logo">
+                </div>
+                <!-- End: Main logo -->
+                <!-- Start: Main image -->
+                <div class="main-image pt-6">
+                    <img src="../assets/images/login-image.svg" alt="hình ảnh">
+                </div>
+                <!-- End: Main image -->
+                <!-- Start: Main form -->
+                <form class="main-form mt-6" [formGroup]="loginForm" (ngSubmit)="submit()">
+                    <!-- Start: Error Alert -->
+                    <div *ngIf="isInvalid" class="alert-error px-2 py-1 mb-4">
+                        {{errorMessage}}
+                    </div>
+                    <!-- ENd: Error Alert -->
+                    <!-- Start: Patient ID -->
+                    <div class="form-group">
+                        <i class="icon-primary form-icon icon-usercard">
+                            <svg id="name" xmlns="http://www.w3.org/2000/svg" width="17.843" height="23.826"
+                                 viewBox="0 0 17.843 23.826">
+                                <path id="Path_283" data-name="Path 283"
+                                      d="M10.288,14.519a2.713,2.713,0,1,0-2.713-2.713A2.713,2.713,0,0,0,10.288,14.519Zm0-4.372a1.664,1.664,0,1,1-1.664,1.664A1.663,1.663,0,0,1,10.288,10.147Zm0,0"
+                                      transform="translate(-1.367 -2.871)" stroke-width="0.5"/>
+                                <path id="Path_284" data-name="Path 284"
+                                      d="M9.911,17.187A4.072,4.072,0,0,0,6.962,18.42,4.353,4.353,0,0,0,5.745,21.5a.526.526,0,0,0,.525.525h7.284a.526.526,0,0,0,.525-.525,4.353,4.353,0,0,0-1.218-3.081,4.072,4.072,0,0,0-2.949-1.233ZM6.831,20.976a3.209,3.209,0,0,1,.882-1.821,3.091,3.091,0,0,1,4.4,0,3.226,3.226,0,0,1,.882,1.821Zm0,0"
+                                      transform="translate(-0.99 -4.537)" stroke-width="0.5"/>
+                                <path id="Path_285" data-name="Path 285"
+                                      d="M14.977,0H2.382A2.625,2.625,0,0,0-.242,2.624V21.2a2.625,2.625,0,0,0,2.624,2.624h12.6A2.625,2.625,0,0,0,17.6,21.2V2.624A2.625,2.625,0,0,0,14.977,0Zm1.574,21.2a1.579,1.579,0,0,1-1.574,1.574H2.382A1.579,1.579,0,0,1,.807,21.2V2.624A1.579,1.579,0,0,1,2.382,1.05h12.6a1.579,1.579,0,0,1,1.574,1.574Zm0,0"
+                                      transform="translate(0.242)" stroke-width="0.5"/>
+                            </svg>
+                        </i>
+                        <input formControlName="id" class="form-control" type="text" placeholder="Mã bệnh nhân">
+                    </div>
+                    <!-- End: Patient ID -->
+                    <!-- Start: Patient Birthday -->
+                    <div class="form-group mt-4">
+                        <i class="icon-primary form-icon">
+                            <svg id="calendar" xmlns="http://www.w3.org/2000/svg" width="21.475" height="22.373"
+                                 viewBox="0 0 21.475 22.373">
+                                <path id="Path_510" data-name="Path 510"
+                                      d="M21.411,8.288V4.837a2.461,2.461,0,0,0-2.458-2.458h-.647V1.991a2,2,0,0,0-4,0v.388H7.073V1.991a2,2,0,0,0-4,0v.388H2.423A2.461,2.461,0,0,0-.035,4.837V19.915a2.461,2.461,0,0,0,2.458,2.458h16.53a2.461,2.461,0,0,0,2.458-2.458V8.643a.554.554,0,0,0,0-.355ZM16.3,1.109a.883.883,0,0,1,.882.882V3.169a.882.882,0,0,1-1.764,0V1.991A.883.883,0,0,1,16.3,1.109ZM4.189,1.991a.882.882,0,0,1,1.764,0V3.169a.882.882,0,0,1-1.764,0ZM2.423,3.5H3.1a2,2,0,0,0,3.947,0H14.33a2,2,0,0,0,3.947,0h.675a1.341,1.341,0,0,1,1.339,1.339V7.906H1.084V4.837A1.341,1.341,0,0,1,2.423,3.5Zm16.53,17.756H2.423a1.341,1.341,0,0,1-1.339-1.339V9.025H20.291v10.89a1.341,1.341,0,0,1-1.339,1.339Zm0,0"
+                                      transform="translate(0.035 0)" stroke-width="0.5"/>
+                            </svg>
+                        </i>
+                        <input formControlName="birthday" (click)="alert()" class="form-control" type="text" readonly placeholder="dd/mm/yyyy">
+                    </div>
+                    <!-- End: Patient Birthday -->
+                    <!-- Start: Login Button -->
+                    <button class="btn btn-primary btn-login mt-6" type="submit">Đăng nhập</button>
+                    <!-- End: Login Button -->
+                </form>
+                <!-- End: Main form -->
+                <div class="main-desc mt-6">
+                    <div>Bạn gặp vấn đề khi đăng nhập?</div>
+                    <div>Liên hệ <strong>1900 8198</strong> để được hỗ trợ.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
 
