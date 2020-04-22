@@ -13,10 +13,7 @@
 <!--                        </ion-item>-->
 <!--                        <ion-item>-->
 <!--                            <ion-label position="floating">Ngày sinh:</ion-label>-->
-<!--                            <ion-datetime placeholder="2020/01/31" class="date-picker" formControlName="birthday"-->
-<!--                                          displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" min="{{minDate}}"-->
-<!--                                          max="{{maxDate}}">-->
-<!--                            </ion-datetime>-->
+
 <!--                        </ion-item>-->
 <!--                    </div>-->
 <!--                    <div padding>-->
@@ -81,7 +78,10 @@
                                       transform="translate(0.035 0)" stroke-width="0.5"/>
                             </svg>
                         </i>
-                        <input formControlName="birthday" (click)="alert()" class="form-control" type="text" readonly placeholder="dd/mm/yyyy">
+                        <ion-datetime placeholder="2020/01/31" class="form-control" formControlName="birthday"
+                                      displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" min="{{minDate}}"
+                                      max="{{maxDate}}">
+                        </ion-datetime>
                     </div>
                     <!-- End: Patient Birthday -->
                     <!-- Start: Login Button -->
