@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {PatientService} from '../../services/patient.service';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {MESSAGES} from '../../common/constants';
 
 @Component({
     selector: 'app-login',
@@ -42,6 +43,7 @@ export class LoginPage implements OnInit {
 
     async submit() {
         this.router.navigate(['./overview']);
+        // this.resetErrorMessage();
         // const loading = await this.loadingController.create({
         //     spinner: 'circles'
         // });
@@ -57,29 +59,21 @@ export class LoginPage implements OnInit {
         //             await loading.dismiss();
         //             await this.router.navigate(['./overview']);
         //         } else {
-        //             const alert = await this.alertController.create({
-        //                 header: 'Đăng nhập thất bại',
-        //                 message: 'Id bệnh nhân hoặc ngày sinh chưa chính xác.' +
-        //                     ' Vui lòng thử lại',
-        //                 buttons: ['Thử lại'],
-        //                 backdropDismiss: false
-        //             });
-        //
-        //             await alert.present();
+        //             this.isInvalid = true;
+        //             this.errorMessage = MESSAGES.AUTHENTICATE_FAIL;
         //             await loading.dismiss();
         //         }
         //     }
         // ).catch(async error => {
-        //         const alert = await this.alertController.create({
-        //             header: 'Đăng nhập thất bại',
-        //             message: ' Vui lòng thử lại',
-        //             buttons: ['Thử lại'],
-        //             backdropDismiss: false
-        //         });
-        //
-        //         await alert.present();
+        //         this.isInvalid = true;
+        //         this.errorMessage = MESSAGES.API_FAIL;
         //         await loading.dismiss();
         //     }
         // );
+    }
+
+    resetErrorMessage() {
+        this.isInvalid = false;
+        this.errorMessage = null;
     }
 }

@@ -1,94 +1,450 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-icon name="chevron-back-outline" (click)="transitToLogin()"></ion-icon>
-        </ion-buttons>
-        <ion-label>Thông tin bệnh nhân</ion-label>
-    </ion-toolbar>
-</ion-header>
+<!--<ion-header>-->
+<!--    <ion-toolbar>-->
+<!--        <ion-buttons slot="start">-->
+<!--            <ion-icon name="chevron-back-outline" (click)="transitToLogin()"></ion-icon>-->
+<!--        </ion-buttons>-->
+<!--        <ion-label>Thông tin bệnh nhân</ion-label>-->
+<!--    </ion-toolbar>-->
+<!--</ion-header>-->
+
+<!--<ion-content>-->
+<!--    <main *ngIf="displayData">-->
+<!--        <ion-card>-->
+<!--            <ion-card-header class="center-text">-->
+<!--                <ion-row>-->
+<!--                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"-->
+<!--                             offset-sm="4">-->
+<!--                        <div class="title">{{displayData.PATIENT_NAME || ''}}-->
+<!--                        </div>-->
+<!--                    </ion-col>-->
+<!--                </ion-row>-->
+<!--            </ion-card-header>-->
+
+<!--            <ion-card-content>-->
+<!--                <ion-grid>-->
+<!--                    <ion-row>-->
+<!--                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"-->
+<!--                                 offset-sm="4">-->
+<!--                            <div>-->
+<!--                                Mã bệnh nhân: {{displayData.PATIENT_ID || ''}}-->
+<!--                            </div>-->
+<!--                        </ion-col>-->
+<!--                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"-->
+<!--                                 offset-sm="4">-->
+<!--                            <div>-->
+<!--                                Ngày sinh: {{displayData.displayBirthday || ''}}-->
+<!--                            </div>-->
+<!--                        </ion-col>-->
+<!--                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"-->
+<!--                                 offset-sm="4">-->
+<!--                            <div>-->
+<!--                                Giới tính:{{displayData.displayGender || ''}}-->
+<!--                            </div>-->
+<!--                        </ion-col>-->
+<!--                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"-->
+<!--                                 offset-sm="4">-->
+<!--                            <div>-->
+<!--                                Địa chỉ:-->
+<!--                            </div>-->
+<!--                        </ion-col>-->
+<!--                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"-->
+<!--                                 offset-sm="4">-->
+<!--                            <div>-->
+<!--                                Số điện thoại:-->
+<!--                            </div>-->
+<!--                        </ion-col>-->
+<!--                    </ion-row>-->
+<!--                </ion-grid>-->
+<!--            </ion-card-content>-->
+<!--        </ion-card>-->
+
+<!--        <ion-grid>-->
+<!--            <ion-row>-->
+<!--                <ion-col class="col-header" size="6" size-lg="6" size-md="6" size-sm="6">-->
+<!--                    <div>-->
+<!--                        Mô tả ca khám-->
+<!--                    </div>-->
+<!--                </ion-col>-->
+<!--                <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">-->
+<!--                    <div>-->
+<!--                        Ngày khám-->
+<!--                    </div>-->
+<!--                </ion-col>-->
+<!--                <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">-->
+<!--                </ion-col>-->
+<!--            </ion-row>-->
+<!--            <ion-row  *ngFor="let caseData of patientData">-->
+<!--                <ion-col class="col-cell" size="6" size-lg="6" size-md="6" size-sm="6">-->
+<!--                    <div>-->
+<!--                        {{caseData.STUDY_DESC}}-->
+<!--                    </div>-->
+<!--                </ion-col>-->
+<!--                <ion-col class="col-cell" size="3" size-lg="3" size-md="3" size-sm="3">-->
+<!--                    <div>-->
+<!--                        {{caseData.STUDY_DTTM}}-->
+<!--                    </div>-->
+<!--                </ion-col>-->
+<!--                <ion-col class="col-cell" style="text-align: center" size="3" size-lg="3" size-md="3" size-sm="3">-->
+<!--                    <ion-button (click)="openImage(caseData.STUDY_KEY)" size="small">Chi tiết</ion-button>-->
+<!--                </ion-col>-->
+<!--            </ion-row>-->
+<!--        </ion-grid>-->
+
+<!--    </main>-->
+<!--</ion-content>-->
 
 <ion-content>
-    <main *ngIf="displayData">
-        <ion-card>
-            <ion-card-header class="center-text">
-                <ion-row>
-                    <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
-                             offset-sm="4">
-                        <div class="title">{{displayData.PATIENT_NAME || ''}}
+    <div class="wrap" *ngIf="displayData">
+        <!-- Start: Sidebar wrap-->
+        <div class="sidebar-wrap" #sidebarMenu>
+            <!-- Start: Sidebar main -->
+            <div class="sidebar px-4 pt-6">
+                <!-- Start: Btn close-->
+                <div class="btn-close pt-1" id="btnClose" (click)="closeMenu()">
+                    <i class="icon-gray icon-close">
+                        <svg id="close" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path id="Path_561" data-name="Path 561" d="M.928,18a.926.926,0,0,1-.654-1.581L16.421.271a.926.926,0,0,1,1.31,1.31L1.584,17.728A.928.928,0,0,1,.928,18Zm0,0" transform="translate(-0.003 0)"/>
+                            <path id="Path_562" data-name="Path 562" d="M17.077,18a.919.919,0,0,1-.654-.272L.274,1.581A.926.926,0,0,1,1.584.271L17.731,16.419A.926.926,0,0,1,17.077,18Zm0,0" transform="translate(-0.003 0)"/>
+                        </svg>
+                    </i>
+                </div>
+                <!-- End: Btn close -->
+                <!-- Start: Sidebar top -->
+                <div class="sidebar-top">
+                    <div class="sidebar-top--avatar mr-4">
+                        Y
+                    </div>
+                    <div class="sidebar-top--info">
+                        <div class="name">{{displayData.displayName || ''}}</div>
+                        <div class="id">{{displayData.PATIENT_ID || ''}}</div>
+                    </div>
+                </div>
+                <!-- End: Sidebar top -->
+                <!-- Start: User info -->
+                <div class="list-group mt-6">
+                    <!-- Start: Gender -->
+                    <div class="list-item mt-3">
+                        <div class="list-item--icon mr-2">
+                            <i class="icon-primary icon--gender">
+                                <svg id="gender" xmlns="http://www.w3.org/2000/svg" width="17.99" height="18" viewBox="0 0 17.99 18">
+                                    <g id="Group_86" data-name="Group 86" transform="translate(0)">
+                                        <g id="Group_85" data-name="Group 85">
+                                            <path id="Path_540" data-name="Path 540" d="M9.493,4.755A4.743,4.743,0,1,0,4.011,9.441v5.293H2.079v1.405H4.011V18H5.417V16.139H7.349V14.734H5.417V9.451A4.75,4.75,0,0,0,9.493,4.755ZM4.749,8.093A3.338,3.338,0,1,1,8.087,4.755,3.342,3.342,0,0,1,4.749,8.093Z" transform="translate(-0.006 -0.002)" stroke-width="0"/>
+                                            <path id="Path_541" data-name="Path 541" d="M15.337,8.56V2.69l1.23,1.23.994-.994L14.634,0,11.708,2.926l.994.994,1.23-1.23v5.88a4.744,4.744,0,1,0,1.405-.01Zm-.668,8.034a3.338,3.338,0,1,1,3.338-3.338A3.342,3.342,0,0,1,14.67,16.595Z" transform="translate(-1.423)" stroke-width="0"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </i>
                         </div>
-                    </ion-col>
-                </ion-row>
-            </ion-card-header>
-
-            <ion-card-content>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
-                                 offset-sm="4">
-                            <div>
-                                Mã bệnh nhân: {{displayData.PATIENT_ID || ''}}
-                            </div>
-                        </ion-col>
-                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
-                                 offset-sm="4">
-                            <div>
-                                Ngày sinh: {{displayData.displayBirthday || ''}}
-                            </div>
-                        </ion-col>
-                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
-                                 offset-sm="4">
-                            <div>
-                                Giới tính:{{displayData.displayGender || ''}}
-                            </div>
-                        </ion-col>
-                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
-                                 offset-sm="4">
-                            <div>
-                                Địa chỉ:
-                            </div>
-                        </ion-col>
-                        <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offset-lg="4" offset-md="4"
-                                 offset-sm="4">
-                            <div>
-                                Số điện thoại:
-                            </div>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
-
-        <ion-grid>
-            <ion-row>
-                <ion-col class="col-header" size="6" size-lg="6" size-md="6" size-sm="6">
-                    <div>
-                        Mô tả ca khám
+                        <div class="list-item--label">{{displayData.displayGender || ''}}</div>
                     </div>
-                </ion-col>
-                <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">
-                    <div>
-                        Ngày khám
+                    <!-- End: Gender -->
+                    <!-- Start: Birthday -->
+                    <div class="list-item mt-3">
+                        <div class="list-item--icon mr-2">
+                            <i class="icon-primary icon--birthday">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17.678" height="18.4" viewBox="0 0 17.678 18.4">
+                                    <g id="calendar" transform="translate(0.227 0.2)">
+                                        <path id="Path_542" data-name="Path 542" d="M17.227,6.668V3.892A1.98,1.98,0,0,0,15.25,1.914h-.521V1.6a1.61,1.61,0,0,0-3.22,0v.312H5.692V1.6a1.61,1.61,0,0,0-3.22,0v.312H1.951A1.98,1.98,0,0,0-.027,3.892V16.022A1.98,1.98,0,0,0,1.951,18h13.3a1.98,1.98,0,0,0,1.978-1.978V6.954a.446.446,0,0,0,0-.285ZM13.119.892a.71.71,0,0,1,.709.71V2.55a.71.71,0,0,1-1.419,0V1.6a.71.71,0,0,1,.71-.71ZM3.372,1.6a.71.71,0,0,1,1.419,0V2.55a.71.71,0,0,1-1.419,0ZM1.951,2.814h.543a1.61,1.61,0,0,0,3.176,0h5.861a1.61,1.61,0,0,0,3.176,0h.543a1.079,1.079,0,0,1,1.077,1.077V6.361H.874V3.892A1.079,1.079,0,0,1,1.951,2.814ZM15.25,17.1H1.951A1.079,1.079,0,0,1,.874,16.022V7.261H16.327v8.761A1.079,1.079,0,0,1,15.25,17.1Zm0,0" stroke-width="0.4"/>
+                                    </g>
+                                </svg>
+                            </i>
+                        </div>
+                        <div class="list-item--label">{{displayData.displayBirthday || ''}}</div>
                     </div>
-                </ion-col>
-                <ion-col class="col-header" size="3" size-lg="3" size-md="3" size-sm="3">
-                </ion-col>
-            </ion-row>
-            <ion-row  *ngFor="let caseData of patientData">
-                <ion-col class="col-cell" size="6" size-lg="6" size-md="6" size-sm="6">
-                    <div>
-                        {{caseData.STUDY_DESC}}
+                    <!-- End: Birthday -->
+                    <!-- Start: Phone number -->
+                    <div class="list-item mt-3">
+                        <div class="list-item--icon mr-2">
+                            <i class="icon-primary icon--phone">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17.083" height="17.159" viewBox="0 0 17.083 17.159">
+                                    <g id="phone" transform="translate(0.086 -0.941)">
+                                        <g id="Group_87" data-name="Group 87">
+                                            <path id="Path_543" data-name="Path 543" d="M14.226,11.15a1.77,1.77,0,0,0-1.284-.589,1.831,1.831,0,0,0-1.3.585l-1.2,1.2c-.1-.053-.2-.1-.293-.152-.137-.068-.266-.133-.376-.2A13.048,13.048,0,0,1,6.647,9.141,7.7,7.7,0,0,1,5.621,7.522c.312-.285.6-.581.881-.866.106-.106.213-.217.319-.323a1.743,1.743,0,0,0,0-2.629L5.784,2.667c-.118-.118-.239-.239-.353-.361-.228-.236-.467-.479-.714-.707a1.8,1.8,0,0,0-1.273-.558A1.861,1.861,0,0,0,2.152,1.6l-.008.008L.853,2.91A2.779,2.779,0,0,0,.029,4.677,6.66,6.66,0,0,0,.515,7.5a16.357,16.357,0,0,0,2.906,4.848A17.878,17.878,0,0,0,9.374,17a9.275,9.275,0,0,0,3.343.988c.08,0,.163.008.239.008a2.863,2.863,0,0,0,2.192-.942c0-.008.011-.011.015-.019a8.636,8.636,0,0,1,.665-.688c.163-.156.331-.319.494-.49a1.9,1.9,0,0,0,.574-1.314,1.826,1.826,0,0,0-.585-1.3Zm1.36,4s0,0,0,0c-.148.16-.3.3-.463.463a9.989,9.989,0,0,0-.733.76,1.831,1.831,0,0,1-1.428.6c-.057,0-.118,0-.175,0a8.24,8.24,0,0,1-2.963-.889,16.876,16.876,0,0,1-5.607-4.392A15.423,15.423,0,0,1,1.48,7.139,5.424,5.424,0,0,1,1.054,4.76a1.744,1.744,0,0,1,.524-1.128l1.3-1.3a.864.864,0,0,1,.577-.27.813.813,0,0,1,.555.266l.011.011c.232.217.452.441.684.68.118.122.239.243.361.369L6.1,4.43a.725.725,0,0,1,0,1.178c-.11.11-.217.22-.327.327-.319.327-.623.631-.954.927-.008.008-.015.011-.019.019a.775.775,0,0,0-.2.862l.011.034a8.327,8.327,0,0,0,1.227,2l0,0a13.944,13.944,0,0,0,3.374,3.07,5.187,5.187,0,0,0,.467.255c.137.068.266.133.376.2.015.008.03.019.046.027a.824.824,0,0,0,.376.095.812.812,0,0,0,.577-.262l1.3-1.3a.859.859,0,0,1,.574-.285.774.774,0,0,1,.547.277l.008.008,2.093,2.093A.751.751,0,0,1,15.586,15.151Z" stroke-width="0.2"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </i>
+                        </div>
+                        <div class="list-item--label">098 765 4321</div>
                     </div>
-                </ion-col>
-                <ion-col class="col-cell" size="3" size-lg="3" size-md="3" size-sm="3">
-                    <div>
-                        {{caseData.STUDY_DTTM}}
+                    <!-- End: Phone number -->
+                    <!-- Start: Address -->
+                    <div class="list-item mt-3">
+                        <div class="list-item--icon mr-2">
+                            <i class="icon-primary icon--address">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14.793" height="18.336" viewBox="0 0 14.793 18.336">
+                                    <g id="placeholder" transform="translate(0.15 0.15)">
+                                        <path id="Path_3" data-name="Path 3" d="M12.231,2.211a7.053,7.053,0,0,0-10.256,0l0,0A7.637,7.637,0,0,0-.143,7.533a7.638,7.638,0,0,0,2.116,5.32l4.806,5.009a.45.45,0,0,0,.636.013l.013-.013,4.806-5.009a7.639,7.639,0,0,0,2.116-5.32,7.638,7.638,0,0,0-2.116-5.32ZM11.584,12.23,7.1,16.9,2.622,12.23a6.85,6.85,0,0,1,0-9.392l0,0a6.153,6.153,0,0,1,8.961,0l0,0a6.85,6.85,0,0,1,0,9.392Zm0,0" transform="translate(0.143 0)" stroke-width="0.3"/>
+                                        <path id="Path_4" data-name="Path 4" d="M7.813,3.357a4.05,4.05,0,1,0,4.05,4.05,4.05,4.05,0,0,0-4.05-4.05Zm0,7.2a3.15,3.15,0,1,1,3.15-3.15A3.15,3.15,0,0,1,7.813,10.557Zm0,0" transform="translate(-0.567 -0.61)" stroke-width="0.3"/>
+                                    </g>
+                                </svg>
+                            </i>
+                        </div>
+                        <div class="list-item--label">Kim Nỗ, Đông Anh, Hà Nội</div>
                     </div>
-                </ion-col>
-                <ion-col class="col-cell" style="text-align: center" size="3" size-lg="3" size-md="3" size-sm="3">
-                    <ion-button (click)="openImage(caseData.STUDY_KEY)" size="small">Chi tiết</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-
-    </main>
+                    <!-- End: Address -->
+                </div>
+                <!-- Start: User info -->
+                <!-- Start: Actions -->
+                <div class="sidebar-actions mt-6">
+                    <!-- Start: Support -->
+                    <div class="sidebar-actions--item">
+                        <button class="btn btn-outline-primary sidebar-actions--button">
+                            <i class="icon-primary sidebar-actions--icon icon-headphones mr-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17.957" height="19" viewBox="0 0 17.957 19">
+                                    <path id="headphones" d="M15.087,8.65H14.8v-2.3a6.348,6.348,0,1,0-12.7,0v2.3H1.815A1.846,1.846,0,0,0-.03,10.495v1.9a1.846,1.846,0,0,0,1.845,1.845H3.473a.425.425,0,0,0,.424-.424V9.074a.425.425,0,0,0-.424-.424H2.947v-2.3a5.5,5.5,0,0,1,11,0v2.3h-.526A.425.425,0,0,0,13,9.074v4.741a.425.425,0,0,0,.424.424h.526V14.8a1.291,1.291,0,0,1-1.289,1.289h-.831a.582.582,0,0,0-.123.017,1.486,1.486,0,0,0-1.429-1.077H8.188a1.484,1.484,0,1,0,0,2.968h2.086A1.491,1.491,0,0,0,11.7,16.923a.39.39,0,0,0,.123.017h.831A2.139,2.139,0,0,0,14.794,14.8v-.564h.288a1.846,1.846,0,0,0,1.845-1.845V10.5a1.84,1.84,0,0,0-1.84-1.849ZM3.049,13.391H1.815a1,1,0,0,1-1-1V10.5a1,1,0,0,1,1-1H3.049Zm7.23,3.761H8.192a.636.636,0,1,1,0-1.272h2.086a.636.636,0,1,1,0,1.272Zm5.8-4.758a1,1,0,0,1-1,1H13.853V9.5h1.234a1,1,0,0,1,1,1Zm0,0" transform="translate(0.53 0.5)" stroke-width="1"/>
+                                </svg>
+                            </i>
+                            <span>Hỗ trợ</span>
+                        </button>
+                    </div>
+                    <!-- End: Support -->
+                    <!-- Start: Logout -->
+                    <div class="sidebar-actions--item mt-4">
+                        <button class="btn btn-outline-primary sidebar-actions--button">
+                            <i class="icon-primary sidebar-actions--icon mr-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.75" height="17.967" viewBox="0 0 18.75 17.967">
+                                    <g id="logout" transform="translate(0.375 0.375)">
+                                        <path id="Path_544" data-name="Path 544" d="M17.413,9.208H6.065a.587.587,0,0,1,0-1.174H17.413a.587.587,0,0,1,0,1.174Zm0,0" transform="translate(0 -0.012)" stroke-width="0.75"/>
+                                        <path id="Path_545" data-name="Path 545" d="M9.2,12.338a.582.582,0,0,1-.415-.172L5.65,9.036a.587.587,0,0,1,0-.83l3.13-3.13a.587.587,0,1,1,.83.83L6.9,8.621l2.716,2.716a.587.587,0,0,1-.416,1Zm0,0" transform="translate(0 -0.012)" stroke-width="0.75"/>
+                                        <path id="Path_546" data-name="Path 546" d="M8.609,17.23A8.609,8.609,0,1,1,16.621,5.472a.587.587,0,1,1-1.093.43,7.434,7.434,0,1,0,0,5.44.587.587,0,1,1,1.093.43A8.565,8.565,0,0,1,8.609,17.23Zm0,0" transform="translate(0 -0.012)" stroke-width="0.75"/>
+                                    </g>
+                                </svg>
+                            </i>
+                            <span>Đăng xuất</span>
+                        </button>
+                    </div>
+                    <!-- End: Logout -->
+                </div>
+                <!-- End: Actions -->
+            </div>
+            <!-- End: Sidebar main -->
+        </div>
+        <!-- End: Sidebar wrap -->
+        <div class="wrap-home">
+            <!-- Start: Navbar wrap-->
+            <div class="navbar-wrap">
+                <div class="navbar px-4">
+                    <div class="navbar-left">
+                        <div class="navbar-icon" id="btnUser" (click)="openMenu()">
+                            <i class="icon-primary icon-user">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16.886" height="20.2" viewBox="0 0 16.886 20.2">
+                                    <g id="user_2_" data-name="user (2)" transform="translate(0.1 0.1)">
+                                        <path id="Path_547" data-name="Path 547" d="M8.217,9.634a4.661,4.661,0,0,0,3.406-1.411,4.661,4.661,0,0,0,1.411-3.406,4.662,4.662,0,0,0-1.411-3.406A4.662,4.662,0,0,0,8.217,0,4.661,4.661,0,0,0,4.811,1.411,4.661,4.661,0,0,0,3.4,4.817,4.661,4.661,0,0,0,4.811,8.223,4.663,4.663,0,0,0,8.217,9.634ZM5.64,2.24A3.482,3.482,0,0,1,8.217,1.172,3.483,3.483,0,0,1,10.794,2.24a3.483,3.483,0,0,1,1.068,2.577,3.482,3.482,0,0,1-1.068,2.577A3.482,3.482,0,0,1,8.217,8.462,3.483,3.483,0,0,1,5.64,7.394,3.482,3.482,0,0,1,4.572,4.817,3.482,3.482,0,0,1,5.64,2.24Zm0,0" stroke-width="0.2"/>
+                                        <path id="Path_548" data-name="Path 548" d="M16.646,15.379a11.9,11.9,0,0,0-.162-1.264,9.957,9.957,0,0,0-.311-1.271,6.277,6.277,0,0,0-.522-1.185,4.467,4.467,0,0,0-.788-1.026,3.473,3.473,0,0,0-1.131-.711,3.91,3.91,0,0,0-1.444-.261,1.466,1.466,0,0,0-.783.332c-.235.153-.509.33-.816.526a4.673,4.673,0,0,1-1.055.465,4.1,4.1,0,0,1-2.581,0A4.659,4.659,0,0,1,6,10.519c-.3-.194-.578-.371-.816-.526A1.465,1.465,0,0,0,4.4,9.661a3.905,3.905,0,0,0-1.444.262,3.47,3.47,0,0,0-1.132.711,4.468,4.468,0,0,0-.787,1.026,6.288,6.288,0,0,0-.522,1.185A9.98,9.98,0,0,0,.2,14.115,11.817,11.817,0,0,0,.04,15.379c-.027.382-.04.779-.04,1.181a3.321,3.321,0,0,0,.986,2.513A3.55,3.55,0,0,0,3.528,20h9.63a3.551,3.551,0,0,0,2.542-.927,3.32,3.32,0,0,0,.986-2.513c0-.4-.014-.8-.04-1.181Zm-1.754,2.845a2.39,2.39,0,0,1-1.734.6H3.528a2.391,2.391,0,0,1-1.734-.6,2.169,2.169,0,0,1-.622-1.664c0-.375.012-.745.037-1.1a10.659,10.659,0,0,1,.146-1.138,8.8,8.8,0,0,1,.273-1.12,5.119,5.119,0,0,1,.425-.964,3.312,3.312,0,0,1,.579-.759,2.3,2.3,0,0,1,.753-.468,2.7,2.7,0,0,1,.923-.178c.041.022.114.063.233.141.241.157.519.336.826.532a5.807,5.807,0,0,0,1.325.592,5.269,5.269,0,0,0,3.3,0,5.813,5.813,0,0,0,1.325-.592c.314-.2.584-.375.825-.532.118-.077.191-.119.233-.141a2.7,2.7,0,0,1,.923.178,2.307,2.307,0,0,1,.753.468,3.3,3.3,0,0,1,.579.759,5.1,5.1,0,0,1,.425.963,8.782,8.782,0,0,1,.273,1.12,10.748,10.748,0,0,1,.146,1.138h0c.025.354.037.724.038,1.1a2.168,2.168,0,0,1-.623,1.663Zm0,0" stroke-width="0.2"/>
+                                    </g>
+                                </svg>
+                            </i>
+                        </div>
+                    </div>
+                    <div class="navbar-title">Kết quả chụp</div>
+                    <div class="navbar-right"></div>
+                </div>
+            </div>
+            <!-- End: Navbar wrap-->
+            <!-- Start: Main -->
+            <div class="main pb-6">
+                <div class="main-top p-4">
+                    <div class="main-top--left mr-4">
+                        <div class="title mb-1">Xin chào {{displayData.displayName || ''}}</div>
+                        <p class="desc">Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Curabitur usue semper pulvinar mi, non tincidunt massa ornare ut.</p>
+                    </div>
+                    <div class="main-top--right">
+                        <div class="box-total">
+                            <div class="box-total--value">24</div>
+                            <div class="box-total--label">ca khám</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <!-- Start: Section -->
+                    <div class="section mt-4">
+                        <div class="section-title mb-1 mx-4">Năm nay</div>
+                        <div class="section-row mx-3">
+                            <!-- Start: Section Col -->
+                            <div class="section-row--col p-1">
+                                <a href="#" class="section-row--link">
+                                    <div class="card">
+                                        <div class="card-mask"></div>
+                                        <div class="card-main">
+                                            <div class="card-header" style="background-image: url('../assets/images/xquang.jpg')">
+                                                <span class="card-header--total">1209</span>
+                                                <i class="icon-white card-header--icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.438" height="12.438" viewBox="0 0 12.438 12.438">
+                                                        <g id="photo" transform="translate(0.25 0.25)">
+                                                            <g id="Group_77" data-name="Group 77">
+                                                                <g id="Group_76" data-name="Group 76">
+                                                                    <path id="Path_538" data-name="Path 538" d="M10.413,0H1.526A1.527,1.527,0,0,0,0,1.526v8.887a1.527,1.527,0,0,0,1.526,1.526h8.887a1.527,1.527,0,0,0,1.526-1.526V1.526A1.527,1.527,0,0,0,10.413,0Zm.822,10.413a.823.823,0,0,1-.822.822H1.526A.823.823,0,0,1,.7,10.413V9.13L3.018,7.161a.227.227,0,0,1,.293,0l1.45,1.2a.352.352,0,0,0,.473-.022l3.445-3.45a.228.228,0,0,1,.338.017l2.219,2.733v2.772Zm0-3.887L9.562,4.465a.931.931,0,0,0-1.381-.071L4.963,7.617l-1.2-1a.929.929,0,0,0-1.2.007L.7,8.207V1.526A.823.823,0,0,1,1.526.7h8.887a.823.823,0,0,1,.822.822Z" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                            <g id="Group_79" data-name="Group 79" transform="translate(2.063 1.469)">
+                                                                <g id="Group_78" data-name="Group 78">
+                                                                    <path id="Path_539" data-name="Path 539" d="M4.114,1.723a1.7,1.7,0,1,0,1.7,1.7A1.7,1.7,0,0,0,4.114,1.723Zm0,2.688a.992.992,0,1,1,.992-.992A.993.993,0,0,1,4.114,4.41Z" transform="translate(-2.419 -1.723)" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </i>
+                                            </div>
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <div class="card-body--title">CT28741</div>
+                                                <div class="card-body--time">10:45 12/04/2020</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End: Section Col -->
+                            <!-- Start: Section Col -->
+                            <div class="section-row--col p-1">
+                                <a href="#" class="section-row--link">
+                                    <div class="card">
+                                        <div class="card-mask"></div>
+                                        <div class="card-main">
+                                            <div class="card-header" style="background-image: url('../assets/images/xquang.jpg')">
+                                                <span class="card-header--total">1209</span>
+                                                <i class="icon-white card-header--icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.438" height="12.438" viewBox="0 0 12.438 12.438">
+                                                        <g id="photo" transform="translate(0.25 0.25)">
+                                                            <g id="Group_77" data-name="Group 77">
+                                                                <g id="Group_76" data-name="Group 76">
+                                                                    <path id="Path_538" data-name="Path 538" d="M10.413,0H1.526A1.527,1.527,0,0,0,0,1.526v8.887a1.527,1.527,0,0,0,1.526,1.526h8.887a1.527,1.527,0,0,0,1.526-1.526V1.526A1.527,1.527,0,0,0,10.413,0Zm.822,10.413a.823.823,0,0,1-.822.822H1.526A.823.823,0,0,1,.7,10.413V9.13L3.018,7.161a.227.227,0,0,1,.293,0l1.45,1.2a.352.352,0,0,0,.473-.022l3.445-3.45a.228.228,0,0,1,.338.017l2.219,2.733v2.772Zm0-3.887L9.562,4.465a.931.931,0,0,0-1.381-.071L4.963,7.617l-1.2-1a.929.929,0,0,0-1.2.007L.7,8.207V1.526A.823.823,0,0,1,1.526.7h8.887a.823.823,0,0,1,.822.822Z" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                            <g id="Group_79" data-name="Group 79" transform="translate(2.063 1.469)">
+                                                                <g id="Group_78" data-name="Group 78">
+                                                                    <path id="Path_539" data-name="Path 539" d="M4.114,1.723a1.7,1.7,0,1,0,1.7,1.7A1.7,1.7,0,0,0,4.114,1.723Zm0,2.688a.992.992,0,1,1,.992-.992A.993.993,0,0,1,4.114,4.41Z" transform="translate(-2.419 -1.723)" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </i>
+                                            </div>
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <div class="card-body--title">CT28741</div>
+                                                <div class="card-body--time">10:45 12/04/2020</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End: Section Col -->
+                            <!-- Start: Section Col -->
+                            <div class="section-row--col p-1">
+                                <a href="#" class="section-row--link">
+                                    <div class="card">
+                                        <div class="card-mask"></div>
+                                        <div class="card-main">
+                                            <div class="card-header" style="background-image: url('../assets/images/xquang.jpg')">
+                                                <span class="card-header--total">1209</span>
+                                                <i class="icon-white card-header--icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.438" height="12.438" viewBox="0 0 12.438 12.438">
+                                                        <g id="photo" transform="translate(0.25 0.25)">
+                                                            <g id="Group_77" data-name="Group 77">
+                                                                <g id="Group_76" data-name="Group 76">
+                                                                    <path id="Path_538" data-name="Path 538" d="M10.413,0H1.526A1.527,1.527,0,0,0,0,1.526v8.887a1.527,1.527,0,0,0,1.526,1.526h8.887a1.527,1.527,0,0,0,1.526-1.526V1.526A1.527,1.527,0,0,0,10.413,0Zm.822,10.413a.823.823,0,0,1-.822.822H1.526A.823.823,0,0,1,.7,10.413V9.13L3.018,7.161a.227.227,0,0,1,.293,0l1.45,1.2a.352.352,0,0,0,.473-.022l3.445-3.45a.228.228,0,0,1,.338.017l2.219,2.733v2.772Zm0-3.887L9.562,4.465a.931.931,0,0,0-1.381-.071L4.963,7.617l-1.2-1a.929.929,0,0,0-1.2.007L.7,8.207V1.526A.823.823,0,0,1,1.526.7h8.887a.823.823,0,0,1,.822.822Z" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                            <g id="Group_79" data-name="Group 79" transform="translate(2.063 1.469)">
+                                                                <g id="Group_78" data-name="Group 78">
+                                                                    <path id="Path_539" data-name="Path 539" d="M4.114,1.723a1.7,1.7,0,1,0,1.7,1.7A1.7,1.7,0,0,0,4.114,1.723Zm0,2.688a.992.992,0,1,1,.992-.992A.993.993,0,0,1,4.114,4.41Z" transform="translate(-2.419 -1.723)" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </i>
+                                            </div>
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <div class="card-body--title">CT28741</div>
+                                                <div class="card-body--time">10:45 12/04/2020</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End: Section Col -->
+                        </div>
+                    </div>
+                    <!-- End: Section -->
+                    <!-- Start: Section -->
+                    <div class="section mt-4">
+                        <div class="section-title mb-1 mx-4">2019</div>
+                        <div class="section-row mx-3">
+                            <!-- Start: Section Col -->
+                            <div class="section-row--col p-1">
+                                <a href="#" class="section-row--link">
+                                    <div class="card">
+                                        <div class="card-mask"></div>
+                                        <div class="card-main">
+                                            <div class="card-header" style="background-image: url('../assets/images/xquang.jpg')">
+                                                <span class="card-header--total">1209</span>
+                                                <i class="icon-white card-header--icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.438" height="12.438" viewBox="0 0 12.438 12.438">
+                                                        <g id="photo" transform="translate(0.25 0.25)">
+                                                            <g id="Group_77" data-name="Group 77">
+                                                                <g id="Group_76" data-name="Group 76">
+                                                                    <path id="Path_538" data-name="Path 538" d="M10.413,0H1.526A1.527,1.527,0,0,0,0,1.526v8.887a1.527,1.527,0,0,0,1.526,1.526h8.887a1.527,1.527,0,0,0,1.526-1.526V1.526A1.527,1.527,0,0,0,10.413,0Zm.822,10.413a.823.823,0,0,1-.822.822H1.526A.823.823,0,0,1,.7,10.413V9.13L3.018,7.161a.227.227,0,0,1,.293,0l1.45,1.2a.352.352,0,0,0,.473-.022l3.445-3.45a.228.228,0,0,1,.338.017l2.219,2.733v2.772Zm0-3.887L9.562,4.465a.931.931,0,0,0-1.381-.071L4.963,7.617l-1.2-1a.929.929,0,0,0-1.2.007L.7,8.207V1.526A.823.823,0,0,1,1.526.7h8.887a.823.823,0,0,1,.822.822Z" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                            <g id="Group_79" data-name="Group 79" transform="translate(2.063 1.469)">
+                                                                <g id="Group_78" data-name="Group 78">
+                                                                    <path id="Path_539" data-name="Path 539" d="M4.114,1.723a1.7,1.7,0,1,0,1.7,1.7A1.7,1.7,0,0,0,4.114,1.723Zm0,2.688a.992.992,0,1,1,.992-.992A.993.993,0,0,1,4.114,4.41Z" transform="translate(-2.419 -1.723)" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </i>
+                                            </div>
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <div class="card-body--title">CT28741</div>
+                                                <div class="card-body--time">10:45 12/04/2020</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End: Section Col -->
+                            <!-- Start: Section Col -->
+                            <div class="section-row--col p-1">
+                                <a href="#" class="section-row--link">
+                                    <div class="card">
+                                        <div class="card-mask"></div>
+                                        <div class="card-main">
+                                            <div class="card-header" style="background-image: url('../assets/images/xquang.jpg')">
+                                                <span class="card-header--total">1209</span>
+                                                <i class="icon-white card-header--icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.438" height="12.438" viewBox="0 0 12.438 12.438">
+                                                        <g id="photo" transform="translate(0.25 0.25)">
+                                                            <g id="Group_77" data-name="Group 77">
+                                                                <g id="Group_76" data-name="Group 76">
+                                                                    <path id="Path_538" data-name="Path 538" d="M10.413,0H1.526A1.527,1.527,0,0,0,0,1.526v8.887a1.527,1.527,0,0,0,1.526,1.526h8.887a1.527,1.527,0,0,0,1.526-1.526V1.526A1.527,1.527,0,0,0,10.413,0Zm.822,10.413a.823.823,0,0,1-.822.822H1.526A.823.823,0,0,1,.7,10.413V9.13L3.018,7.161a.227.227,0,0,1,.293,0l1.45,1.2a.352.352,0,0,0,.473-.022l3.445-3.45a.228.228,0,0,1,.338.017l2.219,2.733v2.772Zm0-3.887L9.562,4.465a.931.931,0,0,0-1.381-.071L4.963,7.617l-1.2-1a.929.929,0,0,0-1.2.007L.7,8.207V1.526A.823.823,0,0,1,1.526.7h8.887a.823.823,0,0,1,.822.822Z" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                            <g id="Group_79" data-name="Group 79" transform="translate(2.063 1.469)">
+                                                                <g id="Group_78" data-name="Group 78">
+                                                                    <path id="Path_539" data-name="Path 539" d="M4.114,1.723a1.7,1.7,0,1,0,1.7,1.7A1.7,1.7,0,0,0,4.114,1.723Zm0,2.688a.992.992,0,1,1,.992-.992A.993.993,0,0,1,4.114,4.41Z" transform="translate(-2.419 -1.723)" stroke-width="0.5"/>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </i>
+                                            </div>
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <div class="card-body--title">CT28741</div>
+                                                <div class="card-body--time">10:45 12/04/2020</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End: Section Col -->
+                        </div>
+                    </div>
+                    <!-- End: Section -->
+                </div>
+            </div>
+            <!-- Start: Main -->
+        </div>
+    </div>
 </ion-content>
